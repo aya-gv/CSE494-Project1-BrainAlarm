@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *answer1;
 @property (weak, nonatomic) IBOutlet UILabel *answer2;
 @property (weak, nonatomic) IBOutlet UILabel *answer3;
+
 @property int correctAns;
 @property int ans1;
 @property int ans2;
@@ -90,6 +91,9 @@ NSTimer *infoUpdater;
         //hide hint for JJ task
         self.hintButton.hidden = YES;
         self.hintLabel.hidden = YES;
+        self.answer1.hidden = YES;
+        self.answer2.hidden = YES;
+        self.answer3.hidden = YES;
     }
     //Math task
     else
@@ -104,7 +108,9 @@ NSTimer *infoUpdater;
         self.jacksTask = nil;
         
         self.hintLabel.hidden = YES;
-        
+        self.answer1.hidden = YES;
+        self.answer2.hidden = YES;
+        self.answer3.hidden = YES;
     }
     
     //For math task
@@ -220,6 +226,9 @@ NSTimer *infoUpdater;
             self.answer2.text = [NSString stringWithFormat:@"%d",ans2];
             ans3 = 101 + arc4random_uniform(9999 - 101+ 1);
             self.answer3.text = [NSString stringWithFormat:@"%d",ans3];
+            self.answer1.hidden = NO;
+            self.answer2.hidden = NO;
+            self.answer3.hidden = NO;
             break;
     
         case 2:
@@ -229,6 +238,9 @@ NSTimer *infoUpdater;
             self.answer2.text = [NSString stringWithFormat:@"%d",self.mathTask.answer];
             ans3 = 101 + arc4random_uniform(9999 - 101+ 1);
             self.answer3.text = [NSString stringWithFormat:@"%d",ans3];
+            self.answer1.hidden = NO;
+            self.answer2.hidden = NO;
+            self.answer3.hidden = NO;
             break;
             
         case 3:
@@ -238,6 +250,9 @@ NSTimer *infoUpdater;
             ans2 =  101 + arc4random_uniform(9999 - 101+ 1);
             self.answer2.text = [NSString stringWithFormat:@"%d",ans2];
             self.answer3.text = [NSString stringWithFormat:@"%d",self.mathTask.answer];
+            self.answer1.hidden = NO;
+            self.answer2.hidden = NO;
+            self.answer3.hidden = NO;
             break;
     }
     
