@@ -28,6 +28,19 @@
 @property (weak, nonatomic) IBOutlet UIButton *mathCheckAnswerButton;
 - (IBAction)checkAnswer:(id)sender;
 
+//for hint system
+@property (weak, nonatomic) IBOutlet UILabel *hintLabel;
+@property (weak,nonatomic) IBOutlet UIButton *hintButton;
+@property (weak, nonatomic) IBOutlet UILabel *answer1;
+@property (weak, nonatomic) IBOutlet UILabel *answer2;
+@property (weak, nonatomic) IBOutlet UILabel *answer3;
+@property int correctAns;
+@property int ans1;
+@property int ans2;
+@property int ans3;
+- (IBAction)hintButton:(id)sender;
+
+
 @property (strong, nonatomic) AVAudioPlayer *click;
 @end
 
@@ -73,6 +86,10 @@ NSTimer *infoUpdater;
         self.mathCheckAnswerButton.enabled = NO;
         self.mathCheckAnswerText.hidden = YES;
         self.mathCheckAnswerText.enabled = NO;
+        
+        //hide hint for JJ task
+        self.hintButton.hidden = YES;
+        self.hintLabel.hidden = YES;
     }
     //Math task
     else
@@ -85,6 +102,8 @@ NSTimer *infoUpdater;
         
         //No JJ task
         self.jacksTask = nil;
+        
+        self.hintLabel.hidden = YES;
         
     }
     
@@ -185,4 +204,44 @@ NSTimer *infoUpdater;
     }
     
 }
+
+//implementing hint system
+- (IBAction)hintButton:(id)sender {
+    int ansPosition = 1 + arc4random_uniform(3);
+    int ans1 = 0;
+    int ans2 = 0;
+    int ans3 = 0;
+    switch(ansPosition)
+    {
+        case 1:
+            self.hintLabel.hidden= NO;
+            self.answer1.text = [NSString stringWithFormat:@"%d",self.mathTask.answer];
+            ans2 =  101 + arc4random_uniform(9999 - 101+ 1);
+            self.answer2.text = [NSString stringWithFormat:@"%d",ans2];
+            ans3 = 101 + arc4random_uniform(9999 - 101+ 1);
+            self.answer3.text = [NSString stringWithFormat:@"%d",ans3];
+            break;
+    
+        case 2:
+            self.hintLabel.hidden= NO;
+            ans1 = 101 + arc4random_uniform(9999 - 101+ 1);
+            self.answer1.text = [NSString stringWithFormat:@"%d", ans1];
+            self.answer2.text = [NSString stringWithFormat:@"%d",self.mathTask.answer];
+            ans3 = 101 + arc4random_uniform(9999 - 101+ 1);
+            self.answer3.text = [NSString stringWithFormat:@"%d",ans3];
+            break;
+            
+        case 3:
+            self.hintLabel.hidden = NO;
+            ans1 = 101 + arc4random_uniform(9999 - 101+ 1);
+            self.answer1.text = [NSString stringWithFormat:@"%d",ans1];
+            ans2 =  101 + arc4random_uniform(9999 - 101+ 1);
+            self.answer2.text = [NSString stringWithFormat:@"%d",ans2];
+            self.answer3.text = [NSString stringWithFormat:@"%d",self.mathTask.answer];
+            break;
+    }
+    
+
+}
+    
 @end
